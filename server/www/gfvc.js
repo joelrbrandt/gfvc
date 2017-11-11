@@ -53,16 +53,10 @@ async function setup () {
     bindButton("btnPowerOn", () => { ws.send("Main.Power=On") });
     bindButton("btnPowerOff", () => { ws.send("Main.Power=Off") });
 
-    bindButton("btnVolumeQuery", () => { ws.send("Main.Volume?") });
+    bindButton("btnPowerQuery", () => { ws.send("Main.Power?") });
 
-    bindButton("btnVolumeMinus1", () => { ws.send("Main.Volume-") });
-    bindButton("btnVolumePlus1", () => { ws.send("Main.Volume+") });
-
-
-    // ws.send("Main.Power=On");
-
-    // ws.send("Main.Volume+");
-
+    bindButton("btnVolumeMinusSmall", () => { ws.send("Main.Volume-") });
+    bindButton("btnVolumePlusSmall", () => { ws.send("Main.Volume+") });
 }
 
 setup();
