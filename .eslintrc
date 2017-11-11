@@ -1,12 +1,18 @@
 {
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
   "globals": {
   },
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "es6": true
   },
   "rules": {
-    "quotes": [1, "double"]
+    "quotes": [1, "double"],
+    "no-console": "off"
   },
   "parser": "babel-eslint"
 }
