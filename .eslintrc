@@ -1,0 +1,12 @@
+{
+  "globals": {
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "quotes": [1, "double"]
+  },
+  "parser": "babel-eslint"
+}
