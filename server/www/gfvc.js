@@ -42,8 +42,11 @@ function bindButton(name, f) {
     btns.forEach((b) => { b.onclick = f });
 }
 
-function randomGradient() {
-    const g = gradients[Math.floor(Math.random() * gradients.length)];
+function setGradient(n) {
+    if (n === undefined) {
+        n = Math.floor(Math.random() * gradients.length);
+    }
+    const g = gradients[n];
     const step = 100.0/(g.colors.length-1);
     var s = "linear-gradient(170deg";
     g.colors.forEach((c, n) => {
@@ -53,11 +56,11 @@ function randomGradient() {
 
     const e = document.getElementsByClassName("content")[0];
     e.style.backgroundImage = s;
-    log("switched gradient: " + g.name);
+    log("switched gradient: " + g.name + " - " + s);
 }
 
 async function setup () {
-    randomGradient();
+    setGradient(283); // Wedding Day Blues
 
     let ws = await createWS();
     console.log(ws);
@@ -75,7 +78,7 @@ async function setup () {
     bindButton("btnVolumeMinusSmall", () => { ws.send("Main.Volume-") });
     bindButton("btnVolumePlusSmall", () => { ws.send("Main.Volume+") });
 
-    bindButton("btnRandomGradient", () => { randomGradient() });
+    bindButton("btnRandomGradient", () => { setGradient() });
 }
 
 setup();
