@@ -1,3 +1,5 @@
+/* global gradients:false */
+
 const log = (function () {
     const log = document.getElementById("log");
     let lastEl = null;
@@ -40,9 +42,24 @@ function bindButton(name, f) {
     btns.forEach((b) => { b.onclick = f });
 }
 
-async function setup () {
-    let ws = await createWS();
+function randomGradient() {
+    const g = gradients[Math.floor(Math.random() * gradients.length)];
+    const step = 100.0/(g.colors.length-1);
+    var s = "linear-gradient(170deg";
+    g.colors.forEach((c, n) => {
+        s = s + ", " + c + " " + step*n + "%"
+    });
+    s = s + ")";
 
+    const e = document.getElementsByClassName("content")[0];
+    e.style.backgroundImage = s;
+    log("switched gradient: " + g.name);
+}
+
+async function setup () {
+    randomGradient();
+
+    let ws = await createWS();
     console.log(ws);
 
     ws.onmessage = function (m) {
@@ -57,6 +74,8 @@ async function setup () {
 
     bindButton("btnVolumeMinusSmall", () => { ws.send("Main.Volume-") });
     bindButton("btnVolumePlusSmall", () => { ws.send("Main.Volume+") });
+
+    bindButton("btnRandomGradient", () => { randomGradient() });
 }
 
 setup();
